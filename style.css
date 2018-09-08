@@ -47,18 +47,7 @@ h2 {
 	font-weight: bold;
 
 }
-button {
-	width : 200px;
-	height: 50px;
-	font-size: 1.1em;
-	text-transform: uppercase;
-	letter-spacing: 5px;
-	background-color: white;
-	border: none;
-	border-color: silver;
-	border-radius: 3px;
-	transition: all 1s;
-}
+
 .normal_buttons {
 	width : 140px;
 	height: 40px;
@@ -69,9 +58,16 @@ button {
 	border: none;
 	border-color: silver;
 	border-radius: 3px;
-	transition: all 1s;
+	transition: all 0.5s;
 	margin : 5px;
+	box-shadow: 1px 1px 1px black;
 }
+
+.normal_buttons:hover {
+	transform: translate(0px , -5px);
+	background-color: #D2696C;
+}
+
 #angleInput {
 	width : 136px;
 	height: 36px;
@@ -82,29 +78,31 @@ button {
 	border-color: silver;
 	border-radius: 5px;
 }
+
+#angleInput:hover {
+	transform: unset;
+	background-color: white;
+}
+
 .errorInput {
 	border-color: red !important;
 }
-button:hover{
+
+.randomBtn {
+	font-size: 1.1em;
+	width: 210px;
+	height: 50px;
+
+}
+.randomBtn:hover{
 	transform: scale(1.1);
 }
 
-button:focus {
+.randomBtn:focus {
 	border-color: silver;
 }
 
+
 .colorpickers  {
 	border : none;
-}
-
-p.background--light {
-  color: black;
-}
-
-p.background--dark {
-  color: silver;
-}
-
-p.background--complex {
-  color: gray;
 }
