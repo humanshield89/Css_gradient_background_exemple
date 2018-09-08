@@ -6,25 +6,34 @@ var directions = ["to left","to right","to top","to bottom","to bottom right","t
 var tobtns = document.getElementsByClassName("tobtns");
 var angleInput = document.getElementById("angleInput");
 var angleSubmit = document.getElementById("change_angle_btn");
-
+var randomBtn = document.getElementById("random_btn");
 var lastDirection = "to right";
 
+// setting event listeners 
 angleInput.addEventListener("keypress",keyPressedEvent);
 angleInput.addEventListener("input",angleInputChanged);
 angleSubmit.addEventListener("click",angleSubmitEvent);
 color1.addEventListener("change",colorChanged);
 color2.addEventListener("change",colorChanged);
+randomBtn.addEventListener("click",setrandomColors);
+
 
 for (i = 0 ; i < tobtns.length ; i++) {
 	tobtns[i].addEventListener("click",tobtnsEvent);
 }
 
+// we only take action on return key ,no need to check for 
+// input validity it's being carried out every time the user tipes something
+// if this triggers means input is correct 
 function keyPressedEvent(event) {
 	if (!angleSubmit.disabled && event.which === 13 ) {
 		angleSubmitEvent();
 	}
 }
 
+// input changed event triggers every time the user change the text feild 
+// we check if what has been entered so far is valid if not we take action 
+// if it checks out we enable the button and the submit value actions
 function angleInputChanged() {
 	if (angleInput.value.length > 0) {
 		var int = parseInt(angleInput.value);
@@ -43,7 +52,7 @@ function angleInputChanged() {
 		angleInput.classList.remove("errorInput")
 	}
 }
-
+// the angle sublit event triggers when the user wanna apply a new angle
 function angleSubmitEvent() {
 		var int = parseInt(angleInput.value);
 		setGradientColor(int+"deg" , rgbString(color1.value) , rgbString(color2.value) , false);
@@ -52,11 +61,12 @@ function angleSubmitEvent() {
 		angleInputChanged();
 }
 
+// thi function handles the event of the color pickers triggers when the color has changed in either of them 
 function colorChanged(){
 	setGradientColor(lastDirection , rgbString(color1.value) , rgbString(color2.value) , true);
 }
 
-
+// random button event action get two color randomly then changes the background
 function setrandomColors() {
 	var lis = [];
 	for (i = 0 ; i < 6 ; i++) {
@@ -66,7 +76,7 @@ function setrandomColors() {
 	color2.value = rgbToHex(lis[3], lis[4], lis[5]);
 	setGradientColor(lastDirection ,"rgb("+lis[0]+","+lis[1]+","+lis[2]+")" , "rgb("+lis[3]+","+lis[4]+","+lis[5]+")" , true);
 } 
-
+// the to buttons event 
 function tobtnsEvent(event) {
 	var element = event.srcElement;
 	for (i = 0 ; i < tobtns.length ; i++) {
@@ -76,7 +86,7 @@ function tobtnsEvent(event) {
 		}
 	}
 }
-
+// set's background-image proprety to css 
 function setGradientColor(direction , firstColor , secondColor ,updateForground) {
 	body.style.backgroundImage = "linear-gradient("+direction+" ,"+ firstColor +","+ secondColor +")";
 	current.innerHTML = "linear-gradient("+direction+" ,"+ firstColor +","+ secondColor +")";
@@ -116,6 +126,7 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16)
     } : null;
 }
+//return a string of an rgb color takes a hex color as a string in argument
 function rgbString(hex) {
 	col = hexToRgb(hex);
 	return "rgb("+col.r+","+col.g+","+col.b+")"
