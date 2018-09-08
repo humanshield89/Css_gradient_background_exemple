@@ -4,6 +4,10 @@ var body = document.getElementsByTagName("body")[0];
 var current = document.getElementById("bg-proprety");
 var directions = ["to left","to right","to top","to bottom","to bottom right","to bottom left","to top right","to top left"];
 var tobtns = document.getElementsByClassName("tobtns");
+
+color1.addEventListener("change",colorChanged);
+color2.addEventListener("change",colorChanged);
+
 for (i = 0 ; i < tobtns.length ; i++) {
 	tobtns[i].addEventListener("click",tobtnsEvent);
 }
