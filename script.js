@@ -68,7 +68,7 @@ function setrandomColors() {
 } 
 
 function tobtnsEvent(event) {
-	var element = event.toElement;
+	var element = event.srcElement;
 	for (i = 0 ; i < tobtns.length ; i++) {
 		if (tobtns[i] === element){
 			setGradientColor(directions[i] , rgbString(color1.value) , rgbString(color2.value) , false);
