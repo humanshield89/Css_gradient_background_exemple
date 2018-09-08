@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Background</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>background generator</h1>
+	</header>
+	<div class="container">
+		<div class="colorPickCont">
+			<input onchange="colorChanged()" type="color" name="colorPick" id="firstColor" value="#052AF6" class="colorpickers">
+			<input onchange="colorChanged()" type="color" name="colorPick" id="secondColor" value="#149C59" class="colorpickers">
+		</div>
+		<div class="colorPickCont">
+			<button class="tobtns" >To left</button>
+			<button class="tobtns" >To right</button>
+			<button class="tobtns" >To top</button>
+			<button class="tobtns" >To bottom</button>
+			<button class="tobtns" >To bottom right</button>
+			<button class="tobtns" >to bottom left</button>
+			<button class="tobtns" >To top right</button>
+			<button class="tobtns" >to top left</button>
+
+		</div>
+		<div class="currentspacing">
+			<h2 class="bgTitle">Current Css background:</h2>
+			<p id="bg-proprety">linear-gradient(to right ,rgb(5,42,246),rgb(20,156,89))</p>
+			<button onclick="setrandomColors()">Random colors</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

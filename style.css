@@ -1,0 +1,95 @@
+html {
+	margin : 0 ;
+	height: 100%;
+}
+body {
+	background-image: linear-gradient(to right ,rgb(5,42,246),rgb(20,156,89));
+	color: silver;
+	width : 100%;
+	height : 100%
+	margin : 0px;
+
+}
+header {
+	justify-content: center;
+}
+h1 ,h2{
+	text-align: center;
+	font-size: 2em;
+	text-transform: uppercase;
+	letter-spacing: 15px;
+}
+h2 {
+	font-size: 1.2em;
+	letter-spacing: 10px;
+}
+.container {
+
+}
+
+.colorPickCont {
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	width: 100%;
+	margin: 10px;
+}
+#bg-proprety {
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+}
+.currentspacing{
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+button {
+	width : 200px;
+	height: 50px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	background-color: white;
+	border: none;
+	border-color: silver;
+	border-radius: 3px;
+	transition: all 1s;
+}
+.tobtns {
+	width : 140px;
+	height: 25px;
+	font-size: 0.6em;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	background-color: white;
+	border: none;
+	border-color: silver;
+	border-radius: 3px;
+	transition: all 1s;
+	margin : 5px;
+}
+
+button:hover{
+	transform: scale(1.1);
+}
+
+button:focus {
+	border-color: silver;
+}
+
+.colorpickers  {
+	border : none;
+}
+
+p.background--light {
+  color: black;
+}
+
+p.background--dark {
+  color: silver;
+}
+
+p.background--complex {
+  color: gray;
+}
