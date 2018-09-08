@@ -9,6 +9,7 @@ var angleSubmit = document.getElementById("change_angle_btn");
 
 var lastDirection = "to right";
 
+angleInput.addEventListener("keypress",keyPressedEvent);
 angleInput.addEventListener("input",angleInputChanged);
 angleSubmit.addEventListener("click",angleSubmitEvent);
 color1.addEventListener("change",colorChanged);
@@ -16,6 +17,12 @@ color2.addEventListener("change",colorChanged);
 
 for (i = 0 ; i < tobtns.length ; i++) {
 	tobtns[i].addEventListener("click",tobtnsEvent);
+}
+
+function keyPressedEvent(event) {
+	if (!angleSubmit.disabled && event.which === 13 ) {
+		angleSubmitEvent();
+	}
 }
 
 function angleInputChanged() {
@@ -42,6 +49,7 @@ function angleSubmitEvent() {
 		setGradientColor(int+"deg" , rgbString(color1.value) , rgbString(color2.value) , false);
 		lastDirection= int+"deg";
 		angleInput.value = "";
+		angleInputChanged();
 }
 
 function colorChanged(){
