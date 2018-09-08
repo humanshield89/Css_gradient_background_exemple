@@ -59,7 +59,7 @@ button {
 	border-radius: 3px;
 	transition: all 1s;
 }
-.tobtns {
+.normal_buttons {
 	width : 140px;
 	height: 40px;
 	font-size: 0.6em;
@@ -72,7 +72,19 @@ button {
 	transition: all 1s;
 	margin : 5px;
 }
-
+#angleInput {
+	width : 136px;
+	height: 36px;
+	font-size: 1em;
+	text-transform:none;
+	letter-spacing:none;
+	border: 2px solid;
+	border-color: silver;
+	border-radius: 5px;
+}
+.errorInput {
+	border-color: red !important;
+}
 button:hover{
 	transform: scale(1.1);
 }

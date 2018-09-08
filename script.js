@@ -4,7 +4,13 @@ var body = document.getElementsByTagName("body")[0];
 var current = document.getElementById("bg-proprety");
 var directions = ["to left","to right","to top","to bottom","to bottom right","to bottom left","to top right","to top left"];
 var tobtns = document.getElementsByClassName("tobtns");
-var lastDirection = 1;
+var angleInput = document.getElementById("angleInput");
+var angleSubmit = document.getElementById("change_angle_btn");
+
+var lastDirection = "to right";
+
+angleInput.addEventListener("input",angleInputChanged);
+angleSubmit.addEventListener("click",angleSubmitEvent);
 color1.addEventListener("change",colorChanged);
 color2.addEventListener("change",colorChanged);
 
@@ -12,11 +18,34 @@ for (i = 0 ; i < tobtns.length ; i++) {
 	tobtns[i].addEventListener("click",tobtnsEvent);
 }
 
+function angleInputChanged() {
+	if (angleInput.value.length > 0) {
+		var int = parseInt(angleInput.value);
+		if(!isNaN(int)) {
+			angleSubmit.disabled = false;
+		}
+		else {
+			angleSubmit.disabled = true;
+		}
+	}  else {
+		angleSubmit.disabled = true;
+	}
+	if (angleSubmit.disabled) {
+		angleInput.classList.add("errorInput");
+	} else {
+		angleInput.classList.remove("errorInput")
+	}
+}
+
+function angleSubmitEvent() {
+		var int = parseInt(angleInput.value);
+		setGradientColor(int+"deg" , rgbString(color1.value) , rgbString(color2.value) , false);
+		lastDirection= int+"deg";
+		angleInput.value = "";
+}
+
 function colorChanged(){
-	//body.style.backgroundImage = "linear-gradient("+directions[lastDirection]+" ,"+ rgbString(color1.value) +","+ rgbString(color2.value) +")";
-	//current.innerHTML = "linear-gradient("+lastDirection[lastDirection]+" ,"+ rgbString(color1.value)  +","+ rgbString(color2.value) +")";
-	//changeForgroundColor();
-	setGradientColor(directions[lastDirection] , rgbString(color1.value) , rgbString(color2.value) , true);
+	setGradientColor(lastDirection , rgbString(color1.value) , rgbString(color2.value) , true);
 }
 
 
@@ -27,7 +56,7 @@ function setrandomColors() {
 	}
 	color1.value = rgbToHex(lis[0], lis[1], lis[2]);
 	color2.value = rgbToHex(lis[3], lis[4], lis[5]);
-	setGradientColor(directions[lastDirection] ,"rgb("+lis[0]+","+lis[1]+","+lis[2]+")" , "rgb("+lis[3]+","+lis[4]+","+lis[5]+")" , true);
+	setGradientColor(lastDirection ,"rgb("+lis[0]+","+lis[1]+","+lis[2]+")" , "rgb("+lis[3]+","+lis[4]+","+lis[5]+")" , true);
 } 
 
 function tobtnsEvent(event) {
@@ -35,7 +64,7 @@ function tobtnsEvent(event) {
 	for (i = 0 ; i < tobtns.length ; i++) {
 		if (tobtns[i] === element){
 			setGradientColor(directions[i] , rgbString(color1.value) , rgbString(color2.value) , false);
-			lastDirection = i;
+			lastDirection = directions[i];
 		}
 	}
 }
@@ -52,11 +81,10 @@ function changeForgroundColor(){
 	var r = (hexToRgb(color1.value).r+hexToRgb(color1.value).r)/2;
 	var g = (hexToRgb(color1.value).g+hexToRgb(color1.value).g)/2;
 	var b = (hexToRgb(color1.value).r+hexToRgb(color1.value).b)/2;
-	var brightness = 1.25;
+	var brightness = 1.20;
 	var ir = Math.floor((255-r)*brightness);
 	var ig = Math.floor((255-g)*brightness);
 	var ib = Math.floor((255-b)*brightness);
-
 	document.getElementsByTagName("body")[0].style.color = "rgb("+ir+","+ig+","+ib+")";
 }
 
