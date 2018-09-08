@@ -13,11 +13,54 @@ for (i = 0 ; i < tobtns.length ; i++) {
 }
 
 function colorChanged(){
-	body.style.backgroundImage = "linear-gradient("+directions[lastDirection]+" ,"+ rgbString(color1.value) +","+ rgbString(color2.value) +")";
-	current.innerHTML = "linear-gradient("+lastDirection[lastDirection]+" ,"+ rgbString(color1.value)  +","+ rgbString(color2.value) +")";
-	changeForgroundColor();
+	//body.style.backgroundImage = "linear-gradient("+directions[lastDirection]+" ,"+ rgbString(color1.value) +","+ rgbString(color2.value) +")";
+	//current.innerHTML = "linear-gradient("+lastDirection[lastDirection]+" ,"+ rgbString(color1.value)  +","+ rgbString(color2.value) +")";
+	//changeForgroundColor();
+	setGradientColor(directions[lastDirection] , rgbString(color1.value) , rgbString(color2.value) , true);
 }
 
+
+function setrandomColors() {
+	var lis = [];
+	for (i = 0 ; i < 6 ; i++) {
+		lis[i] = Math.floor(Math.random()*256);
+	}
+	color1.value = rgbToHex(lis[0], lis[1], lis[2]);
+	color2.value = rgbToHex(lis[3], lis[4], lis[5]);
+	setGradientColor(directions[lastDirection] ,"rgb("+lis[0]+","+lis[1]+","+lis[2]+")" , "rgb("+lis[3]+","+lis[4]+","+lis[5]+")" , true);
+} 
+
+function tobtnsEvent(event) {
+	var element = event.toElement;
+	for (i = 0 ; i < tobtns.length ; i++) {
+		if (tobtns[i] === element){
+			setGradientColor(directions[i] , rgbString(color1.value) , rgbString(color2.value) , false);
+			lastDirection = i;
+		}
+	}
+}
+
+function setGradientColor(direction , firstColor , secondColor ,updateForground) {
+	body.style.backgroundImage = "linear-gradient("+direction+" ,"+ firstColor +","+ secondColor +")";
+	current.innerHTML = "linear-gradient("+direction+" ,"+ firstColor +","+ secondColor +")";
+	if (updateForground)
+		changeForgroundColor();
+}
+
+// change th forground color 
+function changeForgroundColor(){
+	var r = (hexToRgb(color1.value).r+hexToRgb(color1.value).r)/2;
+	var g = (hexToRgb(color1.value).g+hexToRgb(color1.value).g)/2;
+	var b = (hexToRgb(color1.value).r+hexToRgb(color1.value).b)/2;
+	var brightness = 1.25;
+	var ir = Math.floor((255-r)*brightness);
+	var ig = Math.floor((255-g)*brightness);
+	var ib = Math.floor((255-b)*brightness);
+
+	document.getElementsByTagName("body")[0].style.color = "rgb("+ir+","+ig+","+ib+")";
+}
+
+// helper methods 
 // code from overflow 
 function componentToHex(c) {
     var hex = c.toString(16);
@@ -27,6 +70,7 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
 
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -38,41 +82,5 @@ function hexToRgb(hex) {
 }
 function rgbString(hex) {
 	col = hexToRgb(hex);
-	return "rgb("+col.r+","+col.g+","+col.r+")"
-}
-
-function setrandomColors() {
-	var lis = [];
-	for (i = 0 ; i < 6 ; i++) {
-		lis[i] = Math.floor(Math.random(250)*256);
-	}
-	
-	body.style.backgroundImage = "linear-gradient("+directions[lastDirection]+" ,"+ "rgb("+lis[0]+","+lis[1]+","+lis[2]+")" +","+ "rgb("+lis[3]+","+lis[4]+","+lis[5]+")" +")";
-	color1.value = rgbToHex(lis[0], lis[1], lis[2]);
-	color2.value = rgbToHex(lis[3], lis[4], lis[5])
-	current.innerHTML = "linear-gradient("+directions[lastDirection]+" ,"+ "rgb("+lis[0]+","+lis[1]+","+lis[2]+")" +","+ "rgb("+lis[3]+","+lis[4]+","+lis[5]+")" +")";
-	changeForgroundColor();
-} 
-
-function tobtnsEvent(event) {
-	var element = event.toElement;
-	for (i = 0 ; i < tobtns.length ; i++) {
-		if (tobtns[i] === element){
-			body.style.backgroundImage = "linear-gradient("+directions[i]+" ,"+ rgbString(color1.value) +","+ rgbString(color2.value) +")";
-			current.innerHTML = "linear-gradient("+directions[i]+" ,"+ rgbString(color1.value) +","+ rgbString(color2.value) +")";
-			lastDirection = i;
-		}
-	}
-}
-
-function changeForgroundColor(){
-	var r = (hexToRgb(color1.value).r+hexToRgb(color2.value).r)/2;
-	var g = (hexToRgb(color1.value).g+hexToRgb(color2.value).g)/2;
-	var b = (hexToRgb(color1.value).r+hexToRgb(color2.value).b)/2;
-	var brightness = 1;
-	var ir = Math.floor((255-r)*brightness);
-	var ig = Math.floor((255-g)*brightness);
-	var ib = Math.floor((255-b)*brightness);
-
-	document.getElementsByTagName("body")[0].style.color = "rgb("+ir+","+ig+","+ib+")";
+	return "rgb("+col.r+","+col.g+","+col.b+")"
 }
